@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { File } from './file/entities/FileEntity';
+import { Files } from './file/entities/fileEntity';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { File } from './file/entities/FileEntity';
         username: config.get<string>('DB_USERNAME'),
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_DATABASE'),
-        entities: [File],
+        entities: [Files],
         synchronize: true,
         charset: 'utf8_general_ci',
       }),
