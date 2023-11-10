@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Like } from 'typeorm';
+import { Repository, Like, DeepPartial } from 'typeorm';
 import { Files } from './entities/fileEntity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class FileService {
@@ -15,9 +16,30 @@ export class FileService {
     }
 
     async searchFile(text: string): Promise<File[]>{
-        return await this.fileRepository.find({
-            where: Like(`%${text}%`),
-        });
+        try{
+            return await this.fileRepository.find({
+                where: Like(`%${text}%`),
+            });
+        }catch(err){
+            return err;
+        }
+    }
+
+    async fileUpload(fileData: DeepPartial<Files>[]): Promise<Files[]>{
+        try{
+            return await this.fileRepository.save(fileData);
+        }catch(err){
+            return err;
+        }
+        
+    }
+
+    async checkVirus(){
+        
+    }
+
+    async fileDownload(){
+
     }
 
     

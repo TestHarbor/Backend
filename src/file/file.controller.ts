@@ -1,5 +1,6 @@
 import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { FileService } from './file.service';
+import { Files } from './entities/fileEntity';
 
 @Controller('file')
 export class FileController {
@@ -17,8 +18,12 @@ export class FileController {
     
     @Get('search')
     searchFile(@Query('text') text: string) {
-        console.log("Param is " + text);
         return this.fileService.searchFile(text);
+    }
+
+    @Post('upload')
+    fileUpload(fileData: Files[] ) {
+        return this.fileService.fileUpload(fileData);
     }
 
 
