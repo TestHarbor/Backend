@@ -9,7 +9,7 @@ export class Files {
   FileType: string;
 
   @Column({ type: 'varchar', length: 3000,  nullable: false })
-  File: Buffer;
+  File: string;
 
   @Column({ type: 'int', nullable: false })
   Grade: number;
