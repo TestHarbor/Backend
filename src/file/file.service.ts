@@ -27,7 +27,7 @@ export class FileService {
 
     async fileUpload(fileData: DeepPartial<Files>[]): Promise<Files[]>{
         try{
-            //return await this.fileRepository.save(fileData);
+            
         }catch(err){
             return err;
         }
