@@ -25,18 +25,5 @@ export class FileService {
         }
     }
 
-    async fileUpload(fileData: DeepPartial<Files>[]): Promise<Files[]>{
-        try{
-            
-        }catch(err){
-            return err;
-        }
-        
-    }
-
-    async fileDownload(){
-
-    }
-
     
 }

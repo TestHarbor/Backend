@@ -8,7 +8,7 @@ export class Files {
   @Column({ type: 'varchar', length: 20, nullable: false })
   FileType: string;
 
-  @Column({ type: 'varchar', length: 3000,  nullable: false })
+  @Column({ type: 'text', length: 3000,  nullable: false })
   File: string;
 
   @Column({ type: 'int', nullable: false })
