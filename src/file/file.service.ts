@@ -34,10 +34,6 @@ export class FileService {
         
     }
 
-    async checkVirus(){
-        
-    }
-
     async fileDownload(){
 
     }
