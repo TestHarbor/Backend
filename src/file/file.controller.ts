@@ -1,6 +1,10 @@
-import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query, UploadedFile, Body } from '@nestjs/common';
 import { FileService } from './file.service';
+import { Multer } from 'multer';
 import { Files } from './entities/fileEntity';
+import { UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+
 
 @Controller('file')
 export class FileController {
@@ -11,20 +15,29 @@ export class FileController {
         return 'Hello World!';
     }
 
-    @Get('all')
+    @Get('/all')
     getAll() {
         return this.fileService.showAll();
     }
     
-    @Get('search')
+    @Get('/search')
     searchFile(@Query('text') text: string) {
         return this.fileService.searchFile(text);
     }
 
-    @Post('upload')
-    fileUpload(fileData: Files[] ) {
-        return this.fileService.fileUpload(fileData);
+    @Post('/upload')
+    @UseInterceptors(FileInterceptor('file'))
+    async uploadFile(@UploadedFile() file, @Body() fileInfo: Partial<Files>): Promise<void>{
+        const savedFile = await this.fileService.createFile({
+            FileType: file.mimetype,
+            Path: file.path,
+            Grade: fileInfo.Grade,
+            Year: fileInfo.Year,
+            Semester: fileInfo.Semester,
+            Exam: fileInfo.Exam,
+            Subject: fileInfo.Subject,
+            Type: fileInfo.Type,
+            Uploader: fileInfo.Uploader,
+        });
     }
-
-
 }

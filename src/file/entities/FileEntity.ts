@@ -5,11 +5,14 @@ export class Files {
   @PrimaryGeneratedColumn()
   FileID: number;
 
+  @Column({ type: 'varchar', length: 100, nullable: false })
+  Name: string;
+
   @Column({ type: 'varchar', length: 20, nullable: false })
   FileType: string;
 
-  @Column({ type: 'text', length: 3000,  nullable: false })
-  File: string;
+  @Column({ type: 'varchar', length: 300,  nullable: false })
+  Path: string;
 
   @Column({ type: 'int', nullable: false })
   Grade: number;
@@ -28,4 +31,7 @@ export class Files {
 
   @Column({ type: 'varchar', length: 30, nullable: false })
   Type: string;
+
+  @Column({ type: 'varchar', length: 20, nullable: false })
+  Uploader: string;
 }
