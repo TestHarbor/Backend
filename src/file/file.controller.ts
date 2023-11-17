@@ -28,9 +28,11 @@ export class FileController {
     @Post('/upload')
     @UseInterceptors(FileInterceptor('file'))
     async uploadFile(@UploadedFile() file, @Body() fileInfo: Partial<Files>): Promise<void>{
+        const name =  `${ file.Year }학년도 ${ file.Grade }학년 ${ file.Semester }학기 ${ file.Exam }고사 ${ file.Subject } ${ file.Type }`
         const savedFile = await this.fileService.createFile({
+            Name: name,
             FileType: file.mimetype,
-            Path: file.path,
+            Path: 'TEST',
             Grade: fileInfo.Grade,
             Year: fileInfo.Year,
             Semester: fileInfo.Semester,
